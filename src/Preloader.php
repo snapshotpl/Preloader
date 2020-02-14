@@ -142,6 +142,16 @@ class Preloader
     }
 
     /**
+     * @return $this
+     */
+    public function continueWhenMissingFile()
+    {
+       $this->compiler->throwExceptionOnMissingFile = false;
+
+       return $this;
+    }
+
+    /**
      * Generates a preload script of files.
      *
      * @return bool

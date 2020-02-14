@@ -39,7 +39,7 @@ $files = [@list];
 foreach ($files as $file) {
     try {
         if (!(is_file($file) && is_readable($file))) {
-            throw new \Exception("{$file} does not exist or unreadable.");
+            @throw_exception_on_missing_file;
         }
         @mechanism;
     } catch (\Throwable $e) {

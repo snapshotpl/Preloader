@@ -56,6 +56,11 @@ class PreloaderCompiler
     public string $output;
 
     /**
+     * Throw exception on missing file or continue
+     */
+    public bool $throwExceptionOnMissingFile = true;
+
+    /**
      * Returns a compiled string
      *
      * @return string|string[]
@@ -67,7 +72,8 @@ class PreloaderCompiler
             '@generated_at' => date('Y-m-d H:i:s e'),
             '@autoload' => realpath($this->autoload),
             '@list' => $this->parseList(),
-            '@mechanism' => $this->useRequire ? 'require_once $file' : 'opcache_compile_file($file)'
+            '@throw_exception_on_missing_file' => $this->throwExceptionOnMissingFile ? 'throw new \Exception("{$file} does not exist or unreadable.")' : 'continue',
+            '@mechanism' => $this->useRequire ? 'require_once $file' : 'opcache_compile_file($file)',
         ]);
 
         return str_replace(array_keys($replacing), $replacing, $this->contents);
