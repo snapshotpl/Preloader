@@ -138,7 +138,7 @@ class PreloaderTest extends TestCase
         $this->assertStringContainsString($files, $contents);
         $this->assertStringContainsString('opcache.preload=' . realpath($output), $contents);
 
-        $this->assertRegExp('/([0-9]+)-(0{0,1}[1-9]|10|11|12)-([0-2]{0,1}[1-9]|10|20|30|31)\s([01]{0,1}[0-9]|2[0-3]):([0-5]{0,1}[0-9]):([0-5]{0,1}[0-9])/', $contents);
+        $this->assertMatchesRegularExpression('/([0-9]+)-(0{0,1}[1-9]|10|11|12)-([0-2]{0,1}[1-9]|10|20|30|31)\s([01]{0,1}[0-9]|2[0-3]):([0-5]{0,1}[0-9]):([0-5]{0,1}[0-9])/', $contents);
 
         $this->assertStringContainsString('Used Memory: '
             . number_format($usedMemory/1024**2, 1, '.' ,''), $contents);
